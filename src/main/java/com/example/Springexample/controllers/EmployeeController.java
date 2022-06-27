@@ -20,20 +20,20 @@ public class EmployeeController {
         return eService.getEmployees();
     }
     @GetMapping("/employees/{id}")
-    public String getEmployees(@PathVariable("id") Long id){
-        return "Fetching the information for id number "+id;
+    public Employee getEmployees(@PathVariable("id") Long id){
+        return eService.getSingEmployee(id);
     }
     @PostMapping("/employees")
-    public String saveEmployee(@RequestBody Employee employee){
-        return "Saving the employee details to the database "+employee;
+    public Employee saveEmployee(@RequestBody Employee employee){
+        return eService.saveEmployee(employee);
     }
     @PutMapping("/employees/{id}")
     public Employee updateEmployee(@PathVariable Long id,@RequestBody Employee employee){
-        System.out.println("Updating the employee data for the id "+id);
-        return employee;
+        employee.setId(id);
+        return eService.updateEmployee(employee);
     }
     @DeleteMapping("/employees")
-    public String deleteEmployee(@RequestParam Long id){
-        return "Deleting the employee details for the id "+id;
+    public void deleteEmployee(@RequestParam Long id){
+        eService.deleteEmployee(id);
     }
 }
